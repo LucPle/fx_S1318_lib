@@ -1,8 +1,8 @@
-#define FX_SYSTEM   FX_U_24_08
+#define FX_SYSTEM   FX_S_13_18
 #define __M64	1
 
-#if FX_SYSTEM == FX_U_24_08
-#define FX_Q_NUM    8		// bits number below point
+#if FX_SYSTEM == FX_S_13_18
+#define FX_Q_NUM    18		// bits number below point
 
 typedef unsigned int fixed;
 

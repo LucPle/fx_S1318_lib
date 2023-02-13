@@ -14,16 +14,9 @@ int main()
 	toBinaryString(buf, fx);
 	printf("%s\n", buf);
 	printf("%f\n", toFloat(fx));
-	printf("%f\n", toFloat(0));  // min(unsiged)
-	printf("%f\n", toFloat(0xffffffff));  // max(unsigned)
+	printf("min range: %f\n", toFloat(0xffffffff));  // min(siged)
+	printf("max range: %f\n", toFloat(0x7fffffff));  // max(signed)
 	printf("%f\n", toFloat(1));
 	
-	extern fixed gl_half;
-	fprintf(stderr, "0.5 is = %f\n", toFloat(gl_half));
-
-	unsigned int z = -1;
-	printf("%u\n", z);
 	return 0;
 }
-
-
