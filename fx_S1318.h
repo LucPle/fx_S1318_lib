@@ -3,7 +3,7 @@
 
 #if FX_SYSTEM == FX_S_13_18
 
-typedef unsigned int fixed;
+typedef int fixed;
 
 // bits number below point
 #define FX_Q_NUM 18		
@@ -21,10 +21,11 @@ extern fixed fromChar(char f);
 extern fixed fromInt(int f);
 extern fixed fromFloat(float f);
 extern fixed fromDouble(double f);
-extern char toChar(fixed x);
+
+extern char toChar(fixed x);;
+extern int toInt(fixed x);
 extern float toFloat(fixed x);
-extern float toFloat(fixed x);
-extern float toFloat(fixed x);
+extern double toDouble(fixed x);
 
 
 

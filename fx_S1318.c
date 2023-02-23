@@ -1,5 +1,6 @@
 #include "fx_S1318.h"
 
+#define FX_SYSTEM FX_S_13_18
 #if FX_SYSTEM == FX_S_13_18
 
 // Tables for Calculation
@@ -14,25 +15,35 @@ const float SinTable[91] = {0,0.0175,0.0349,0.0523,0.0698,0.0872,0.1045,0.1219,0
                             0.9848,0.9877,0.9903,0.9925,0.9945,0.9962,0.9976,0.9986,0.9994,0.9998,
                             1};
 
+// conversion function
+fixed fromChar(char f) {
+	return (fixed) (f * (1 << FX_Q_NUM));
+}
+fixed fromInt(int f) {	
+	return (fixed) (f * (1 << FX_Q_NUM));
+}
 fixed fromFloat(float f) {
-	int ret, sign = 0;
-	if (f < 0) {
-		sign = 1;
-		f = -f;
-	}
-	ret = (fixed) (f * (1 << FX_Q_NUM));
-	return sign == 0 ? ret : ret + (1 << 31);
+	return (fixed) (f * (1 << FX_Q_NUM));
+}
+fixed fromDouble(double f) {	
+	return (fixed) (f * (1 << FX_Q_NUM));
+}
+
+
+char toChar(fixed x) {
+	return (((char) x) / (1 << FX_Q_NUM));
+}
+
+int toInt(fixed x) {
+	return (((int) x) / (1 << FX_Q_NUM));
 }
 
 float toFloat(fixed x) {
-	if ((int)x >= 0) {
-		return (float) x / (1 << FX_Q_NUM);
-	}
-	else {
-		return -(float)(x - (1 << 31)) / (1 << FX_Q_NUM);
-	}
+	return (((float) x) / (1 << FX_Q_NUM));
 }
 
+double toDouble(fixed x) {
+	return (((double) x) / (1 << FX_Q_NUM));
+}
 
 #endif
-

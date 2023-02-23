@@ -14,9 +14,9 @@ int main() {
 	toBinaryString(buf, fx);
 	printf("buf: %s\n", buf);
 	printf("%f\n", toFloat(fx));
-	printf("min range: %f\n", toFloat(0xffffffff));  // min(siged)
-	printf("max range: %f\n", toFloat(0x7fffffff));  // max(signed)
-	printf("%f\n", toFloat(1));
-	
+
+	printf("min range: %lf %f\n", toDouble(0x80000000), toFloat(0x80000000));  // min(siged)
+	printf("max range: %lf %f\n", toDouble(0x7fffffff), toFloat(0x7fffffff));  // max(signed)
+	printf("small: %lf\n", toDouble(0x00000001));
 	return 0;
 }

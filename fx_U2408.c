@@ -5,13 +5,7 @@ int global_A = 9999;
 
 fixed fromFloat(float f)
 {
-	int ret;
-	static int a = 9999;
-	int b = 100;
-	a++;
-	b++;
-	ret = (fixed) (f * (1<< FX_Q_NUM));
-	return ret;
+	return (fixed) (f * (1<< FX_Q_NUM));
 }
 
 float toFloat(fixed x)
