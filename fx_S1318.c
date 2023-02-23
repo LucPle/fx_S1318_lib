@@ -15,7 +15,7 @@ const float SinTable[91] = {0,0.0175,0.0349,0.0523,0.0698,0.0872,0.1045,0.1219,0
                             0.9848,0.9877,0.9903,0.9925,0.9945,0.9962,0.9976,0.9986,0.9994,0.9998,
                             1};
 
-// conversion function
+// Conversion Functions
 fixed fromChar(char f) {
 	return (fixed) (f * (1 << FX_Q_NUM));
 }
@@ -44,6 +44,39 @@ float toFloat(fixed x) {
 
 double toDouble(fixed x) {
 	return (((double) x) / (1 << FX_Q_NUM));
+}
+
+// Calculating Functions
+fixed add(fixed a, fixed b) {
+	return (a + b);
+}
+
+fixed sub(fixed a, fixed b) {
+	return (a - b);
+}
+
+fixed mul_float(fixed a, fixed b) {
+	return (fixed) ((float) a * (float) b / FX_Q_VAL);
+}
+
+fixed mul_bal(fixed a, fixed b) {
+	return ((a >> FX_Q_HALF) * (b >> FX_Q_HALF));
+}
+
+fixed mul_fast(fixed a, fixed b) {
+	return ((a * b) >> FX_Q_NUM);
+}
+
+fixed div_float(fixed a, fixed b) {
+	return b != 0 ? (fixed) (FX_Q_FVAL * (float) a / (float) b) : 0;
+}
+
+fixed div_prev(fixed a, fixed b) {
+	return b != 0 ? ((a << FX_Q_NUM) / b) : 0;
+}
+
+fixed div_next(fixed a, fixed b) {
+	return b != 0 ? ((a / b) << FX_Q_NUM) : 0;
 }
 
 #endif
