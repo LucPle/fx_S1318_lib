@@ -155,6 +155,8 @@ float sinTable[91] = {
     * 즉, 곱셈에 비해 큰 차이가 발생하지는 않았다.
 2. 64bits로 컴파일했을 때의 성능분석 <br>
 ![image.png](./image/image2.png)
+* 곱셈: mul_long, mul_fast, mul_bal, mul_float순으로 연산 속도가 빠름을 알 수 있다.
+* 나눗셈: div_float, div_next, div_prev, div_long순으로 연산 속도가 빠름을 알 수 있다.
 
     
 
