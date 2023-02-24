@@ -14,7 +14,7 @@ int main() {
     char buf_x[512], buf_y[512];
 
 	x = fromFloat(a);
-    y = fromFloat(b);
+    y = _fromFloat(b);
 	toBinaryString(buf_x, x);
     toBinaryString(buf_y, y);
 
@@ -24,6 +24,9 @@ int main() {
 	printf("표현 가능한 최소 값: %lf\n", toDouble(0x80000000));  // min(siged)
 	printf("표현 가능한 최대 값: %lf\n", toDouble(0x7fffffff));  // max(signed)
 	printf("표현 가능한 최소 간격: %lf\n\n", toDouble(0x00000001));
+
+	printf("%f를 fx_S1318로 변환 (fromFloat 함수): %d | %s\n", a, x, buf_x);
+	printf("%f를 fx_S1318로 변환 (_fromFloat 매크로): %d | %s\n\n", b, y, buf_y);
 
 	printf("사칙연산 연산 테스트 환경: a = %f, b = %f\n", a, b);
 	printf("1st number: %f, fx_S1318's binary: %s\n", a, buf_x);

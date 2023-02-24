@@ -13,13 +13,20 @@ typedef int fixed;
 #define FX_Q_VAL 262144
 #define FX_Q_FVAL 262144.0f
 
-// Constant Number
+// Number
 #define PI 3.141592
 #define Euler 2.718281
 #define log2 0.693147
 #define ln10 2.302585
 #define sqrt2 1.414214
 #define sqrt3 1.732051
+
+// Macro
+#define _fromFloat(f) (fixed) ((f) * (1 << FX_Q_NUM))
+#define _toFloat(x) (((float) (x)) / (1 << FX_Q_NUM))
+#define _add(a, b) ((a) + (b))
+#define _sub(a, b) ((a) - (b))
+#define _mul(a, b) ((a) * (b))
 
 // Conversion Function
 extern fixed fromChar(char f);

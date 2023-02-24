@@ -31,7 +31,11 @@ int main() {
     printf("div_float: %f\n", toFloat(div_float(x, y)));
     printf("div_prev: %f\n", toFloat(div_prev(x, y)));
     printf("div_next: %f\n", toFloat(div_next(x, y)));
-    printf("div_long: %f\n\n", toFloat(div_long(x, y)))
+    printf("div_long: %f\n\n", toFloat(div_long(x, y)));
+
+    printf("macro add: %f\n", _toFloat(_add(x, y)));
+    printf("macro sub: %f\n", _toFloat(_sub(x, y)));
+    printf("macro mul: %f\n\n", _toFloat(_mul(x, y)));
 
 	return 0;
 }
