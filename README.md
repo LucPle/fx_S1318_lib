@@ -209,4 +209,11 @@ float sinTable[91] = {
     2. cosDeg()가 0이 아니라면 sinDeg(deg) / cosDeg(deg)
 
 ## 6. Makefile
+    * Makefile의 주요 기능 소개
+* make main: fx_S1318의 소개와 대략적인 기능을 컴파일할 때 사용한다.
+* make fund: 사칙연산 기능을 컴파일할 때 사용한다.
+* make trig: 삼각함수 기능을 컴파일할 때 사용한다.
+* make perf_64: 64bits 환경에서 곱셈과 나눗셈의 퍼포먼스 측정을 할 때 사용한다.
+* make perf_32: 32bits 환경에서 곱셈과 나눗셈의 퍼포먼스 측정을 할 때 사용한다.
+* make clean: .o, .out, 실행파일을 제거할 때 사용한다.
 
