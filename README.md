@@ -43,7 +43,7 @@
 * 간단한 사칙연산 및 삼각함수 degree 계산을 소개한다.
 #### fx_S1318.h
 * header file이고, 다양한 MACRO와 Extern Function을 포함한다.
-* Macro: 계산의 편의를 위한 매크로
+* 계산의 편의를 위한 다양한 Macro를 선언했다.
 
 |    MACRO   |    VALUE   |                     DESCRIPTION                     |
 |:----------:|:----------:|:---------------------------------------------------:|
@@ -60,6 +60,8 @@
 |    ln10    |  2.302585  |                   number of ln(10)                  |
 |    sqrt2   |  1.414214  |               number of square root(2)              |
 |    sqrt3   |  1.732051  |               number of square root(3)              |
+
+
 
 #### fx_S1318.c
 * Conversion Fuction: fixed를 다른 타입으로, 혹은 다른 타입에서 fixed로 변환하는 함수
