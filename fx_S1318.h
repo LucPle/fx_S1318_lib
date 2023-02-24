@@ -10,14 +10,10 @@ typedef int fixed;
 #define FX_Q_HALF 9	
 #define FX_Q_VAL 262144
 #define FX_Q_FVAL 262144.0f
-// Constant Number
-#define PI 3.141592653589793238
-#define Euler 2.718281828459045235
 
-// Trigonometric Function
-extern float sinDeg(float deg);
-extern float cosDeg(float deg);
-extern float tanDeg(float deg);
+// Constant Number
+#define PI 3.141592
+#define Euler 2.718281
 
 // Conversion Function
 extern fixed fromChar(char f);
@@ -33,12 +29,23 @@ extern double toDouble(fixed x);
 // Calculating Functions
 extern fixed add(fixed a, fixed b);
 extern fixed sub(fixed a, fixed b);
+
 extern fixed mul_float(fixed a, fixed b);
 extern fixed mul_bal(fixed a, fixed b);
 extern fixed mul_fast(fixed a, fixed b);
+extern fixed mul_long(fixed a, fixed b);
+
 extern fixed div_float(fixed a, fixed b);
 extern fixed div_prev(fixed a, fixed b);
 extern fixed div_next(fixed a, fixed b);
+extern fixed div_long(fixed a, fixed b);
+
+// Trigonometric Function
+extern float sinDeg(fixed deg);
+extern float cosDeg(fixed deg);
+extern float tanDeg(fixed deg);
+
+// Sine Function Table
+extern float sinTable[91];
 
 #endif
-

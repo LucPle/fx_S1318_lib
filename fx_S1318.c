@@ -4,28 +4,30 @@
 #if FX_SYSTEM == FX_S_13_18
 
 // Tables for Calculation
-const float SinTable[91] = {0,0.0175,0.0349,0.0523,0.0698,0.0872,0.1045,0.1219,0.1392,0.1564,
-                            0.1737,0.1908,0.2079,0.225,0.2419,0.2588,0.2756,0.2924,0.309,0.3256,
-                            0.342,0.3584,0.3746,0.3907,0.4067,0.4226,0.4384,0.454,0.4695,0.4848,
-                            0.5,0.515,0.5299,0.5446,0.5592,0.5736,0.5878,0.6018,0.6157,0.6293,
-                            0.6428,0.6561,0.6691,0.682,0.6947,0.7071,0.7193,0.7314,0.7431,0.7547,
-                            0.766,0.7771,0.788,0.7986,0.809,0.8192,0.829,0.8387,0.848,0.8572,
-                            0.866,0.8746,0.8829,0.891,0.8988,0.9063,0.9135,0.9205,0.9272,0.9336,
-                            0.9397,0.9455,0.9511,0.9563,0.9613,0.9659,0.9703,0.9744,0.9781,0.9816,
-                            0.9848,0.9877,0.9903,0.9925,0.9945,0.9962,0.9976,0.9986,0.9994,0.9998,
-                            1};
+float sinTable[91] = {
+	0,4574.4128,9148.8256,13720.61696,18287.16544,22848.47104,27401.91232,31947.48928,36482.58048,41007.18592,
+	45521.3056,50019.69664,54502.35904,58969.2928,63417.87648,67848.11008,72257.37216,76643.04128,81007.73888,85346.22208,
+	89658.49088,93944.54528,98201.76384,102427.5251,106624.4506,110787.2973,114916.0653,119010.7546,123068.7437,127090.0326,
+	131072,135014.6458,138915.3485,142774.1082,146588.3034,150360.5555,154085.6218,157763.5021,161391.575,164972.4621,
+	168503.5418,171982.1926,175408.4147,178782.208,182100.951,185364.6438,188570.665,191719.0144,194809.6922,197842.6982,
+	200812.7898,203725.2096,206572.0934,209358.6842,212079.7389,214735.2576,217327.8618,219852.3085,222311.2192,224701.9725,
+	227024.5683,229276.3853,231460.0448,233572.9254,235612.4058,237583.7286,239481.6512,241303.552,243054.6739,244732.3955,
+	246334.0954,247862.3949,249314.6726,250688.3072,251988.5414,253212.7539,254358.3232,255425.2493,256416.1536,257328.4147,
+	258162.0326,258917.0074,259593.3389,260191.0272,260707.4509,261145.2314,261504.3686,261784.8627,261984.0922,262104.6784,
+	262144
+};
 
 // Conversion Functions
 fixed fromChar(char f) {
 	return (fixed) (f * (1 << FX_Q_NUM));
 }
-fixed fromInt(int f) {	
+fixed fromInt(int f) {
 	return (fixed) (f * (1 << FX_Q_NUM));
 }
 fixed fromFloat(float f) {
 	return (fixed) (f * (1 << FX_Q_NUM));
 }
-fixed fromDouble(double f) {	
+fixed fromDouble(double f) {
 	return (fixed) (f * (1 << FX_Q_NUM));
 }
 
@@ -56,7 +58,7 @@ fixed sub(fixed a, fixed b) {
 }
 
 fixed mul_float(fixed a, fixed b) {
-	return (fixed) ((float) a * (float) b / FX_Q_VAL);
+	return (fixed) ((float) a * (float) b / FX_Q_FVAL);
 }
 
 fixed mul_bal(fixed a, fixed b) {
@@ -65,6 +67,10 @@ fixed mul_bal(fixed a, fixed b) {
 
 fixed mul_fast(fixed a, fixed b) {
 	return ((a * b) >> FX_Q_NUM);
+}
+
+fixed mul_long(fixed a, fixed b) {
+	return (fixed) (((long long) a * (long long) b) >> FX_Q_NUM);
 }
 
 fixed div_float(fixed a, fixed b) {
@@ -77,6 +83,33 @@ fixed div_prev(fixed a, fixed b) {
 
 fixed div_next(fixed a, fixed b) {
 	return b != 0 ? ((a / b) << FX_Q_NUM) : 0;
+}
+
+fixed div_long(fixed a, fixed b) {
+	return b != 0 ? (fixed) (((long long) a << FX_Q_NUM) / (long long) b) : 0;
+}
+
+// Trigonometric Function
+float sinDeg(fixed deg) {
+	if (0 <= deg && deg <= 90)
+		return toFloat((fixed)sinTable[deg]);
+	else if (90 < deg && deg <= 180)
+		return toFloat(sinTable[180 - deg]);
+	else if (180 < deg && deg <= 270)
+		return (-1) * toFloat(sinTable[deg - 180]);
+	else
+		return (-1) * toFloat(sinTable[360 - deg]);
+}
+
+float cosDeg(fixed deg) {
+	if (0 <= deg && deg <= 270)
+		return sinDeg(deg + 90);
+	else
+		return sinDeg(deg - 270);
+}
+
+float tanDeg(fixed deg) {
+		return sinDeg(deg) / cosDeg(deg);
 }
 
 #endif
