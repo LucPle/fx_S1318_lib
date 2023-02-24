@@ -7,8 +7,9 @@
 ## 목차
 - [1. 프로젝트 요약](#1--------)
 - [2. 고정소수점 fx_S1318 소개](#2-------fx-s1318---)
-    + [fx_S1318의 구조](#fx-s1318----)
-    + [fx_S1318의 특징](#fx-s1318----)
+- [3. 프로젝트 파일 설명](#3-----------)
+- [4. 정밀도 및 구현 분석](#4------------)
+- [5. 속도 분석](#5------)
 
 ## 1. 프로젝트 요약
     아주대학교 실전 코딩2 최종 프로젝트를 위해 제작된 프로젝트로,
@@ -115,16 +116,6 @@ float sinTable[91] = {
 * 두 실수를 입력받아 사칙연산을 진행한다.
 * 이때, 곱셈과 나눗셈은 각각 네 가지 방법으로 계산한다.
 * 나눗셈의 경우 분모가 0이 되는 경우(=b가 0인 경우)는 0을 출력한다.
-* 곱셈
-    1. mul_float():
-    2. mul_bal():
-    3. mul_fast():
-    4. mul_long():
-* 나눗셈
-    1. div_float():
-    2. div_prev():
-    3. div_next():
-    4. div_long():
 
 #### trig_calc.c: 고정소수점을 이용한 삼각함수 구현
 * degree단위의 값 하나를 입력받아 sin, cos, tan 값을 각각 구한다.
@@ -136,10 +127,27 @@ float sinTable[91] = {
 * 이때, 32비트와 64비트 모두 측정한다.
 * 측정 결과는 각각 32bits_test.txt와 64bits_test.txt파일에 저장한다.
 
-#### tobin.c: 곱셈과 나눗셈 함수의 성능을 측정
+#### tobin.c: fx_S1318형태의 2진법 배열 생성
 * 입력받은 정수에 대하여 2진법의 모양처럼 배열로 리턴하는 함수를 포함한다.
 
-## 4. 정밀도 분석
+## 4. 정밀도 및 구현 분석
+    * 곱셈과 나눗셈함수의 정밀도를 분석한다.
+    * 삼각함수의 구현 방식을 분석한다.
+* 곱셈: 기본적으로 fx_S1318의 표현 범위인 -8192~8191.999996를 벗어나면 비정상적인 결과를 리턴한다.
+    1. mul_float(): 최대한 안전하게 곱하는 함수이다.
+        * a와 b를 곱하고 262144.0f로 나누는데, 이때 나눈 값이 int 범위를 벗어나면 비정상적인 값을 리턴한다.
+    2. mul_bal(): mul_fast보다 안전하게 곱하는 함수이다.
+        * 9bits씩 오른쪽 쉬프트를 실시한 후 곱한 값을 리턴한다.
+        * 따라서 두 값중 하나라도 2<sup>-9</sup>보다 작은 값을 넣으면 무조건 0을 리턴한다.
+    3. mul_fast(): mul_bal보다 빠르지만, 장단점이 존재한다.
+        * 두 값을 곱한 이후 오른쪽 쉬프트를 실시한다.
+        * 따라서 두 값을 곱한 이후의 값이 2<sup>-9</sup>
+    4. mul_long():
+* 나눗셈: 0으로 나누는 경우 0을 리턴하고, 그 외의 경우 정상적으로 수행한다.
+    1. div_float():
+    2. div_prev():
+    3. div_next():
+    4. div_long():
 
 ## 5. 속도 분석
     * 전체 내용은 32bits_test.txt와 64bits_test.txt 저장되어있다.
@@ -153,11 +161,16 @@ float sinTable[91] = {
 * 나눗셈: div_prev, div_long, div_next, div_float순으로 연산 속도가 빠름을 알 수 있다.
     * self seconds 기준으로 가장 빠른 div_prev와 가장 느린 div_float의 차이는 0.9이다.
     * 즉, 곱셈에 비해 큰 차이가 발생하지는 않았다.
+* 32bits로 최대한 빠르게 연산을 해야 한다면 mul_fast와 div_prev를 유의하여 사용해야 하고,
+* 최대한 정확하게 연산하려면 mul_float와 div_float를 사용해야 한다.
 2. 64bits로 컴파일했을 때의 성능분석 <br>
 ![image.png](./image/image2.png)
 * 곱셈: mul_long, mul_fast, mul_bal, mul_float순으로 연산 속도가 빠름을 알 수 있다.
+    * 나눗셈에 비해 float가 느린 것을 확인할 수 있는데, 이는 여러 변수들에 의해 속도에 영향을 받을 수 있다.
+    * 출처: https://stackoverflow.com/questions/2550281/floating-point-vs-integer-calculations-on-modern-hardware
 * 나눗셈: div_float, div_next, div_prev, div_long순으로 연산 속도가 빠름을 알 수 있다.
-
-    
-
+    * 64bits 환경에서 div_float가 빠른 것은 당연하다.
+    * 곱셈과 나눗셈에서 floating point number로 연산하는 것이 integer number보다 빠른 이유는 exponent 파트가 존재하기 때문이다.
+    * 출처: https://stackoverflow.com/questions/55832817/why-float-division-is-faster-than-integer-division-in-c
+* 64bits로 최대한 빠르게 연산을 해야 한다면 mul_long과 div_float를 사용하면 된다.
 
