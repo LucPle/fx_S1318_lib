@@ -11,7 +11,7 @@
 - [3. 파일 설명](#3-파일-설명)
 - [4. 속도 및 정밀도 분석](#4-속도-및-정밀도-분석)
 - [5. 구현 분석](#5-구현-분석)
-- [6. Makefile](#6-Makefile)
+- [6. Makefile](#6-makefile)
 
 ## 1. 프로젝트 요약
     아주대학교 실전 코딩2 최종 프로젝트를 위해 제작된 프로젝트로,
@@ -43,7 +43,7 @@
 * 간단한 사칙연산 및 삼각함수 degree 계산을 소개한다.
 #### fx_S1318.h
 * header file이고, 다양한 MACRO와 Extern Function을 포함한다.
-* Macro: 계산의 편의를 위한 매크로
+* 계산의 편의를 위한 다양한 Macro를 선언했다.
 
 |    MACRO   |    VALUE   |                     DESCRIPTION                     |
 |:----------:|:----------:|:---------------------------------------------------:|
@@ -60,6 +60,8 @@
 |    ln10    |  2.302585  |                   number of ln(10)                  |
 |    sqrt2   |  1.414214  |               number of square root(2)              |
 |    sqrt3   |  1.732051  |               number of square root(3)              |
+
+
 
 #### fx_S1318.c
 * Conversion Fuction: fixed를 다른 타입으로, 혹은 다른 타입에서 fixed로 변환하는 함수
@@ -208,5 +210,12 @@ float sinTable[91] = {
     1. cosDeg()가 0이라면 분모가 0이므로 계산할 수 없다. 따라서 -9999를 리턴한다. (에러코드)
     2. cosDeg()가 0이 아니라면 sinDeg(deg) / cosDeg(deg)
 
-## 6. Makefile
+## 6. makefile
+    * Makefile의 주요 기능 소개
+* make main: fx_S1318의 소개와 대략적인 기능을 컴파일할 때 사용한다.
+* make fund: 사칙연산 기능을 컴파일할 때 사용한다.
+* make trig: 삼각함수 기능을 컴파일할 때 사용한다.
+* make perf_64: 64bits 환경에서 곱셈과 나눗셈의 퍼포먼스 측정을 할 때 사용한다.
+* make perf_32: 32bits 환경에서 곱셈과 나눗셈의 퍼포먼스 측정을 할 때 사용한다.
+* make clean: .o, .out, 실행파일을 제거할 때 사용한다.
 
