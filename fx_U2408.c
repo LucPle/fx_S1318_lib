@@ -14,4 +14,3 @@ float toFloat(fixed x)
 }
 
 #endif
-

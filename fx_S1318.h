@@ -1,5 +1,7 @@
+#define FX_S_13_18 -1318
 #define FX_SYSTEM FX_S_13_18
 #define __M64 1
+#define __M32 0
 
 #if FX_SYSTEM == FX_S_13_18
 
@@ -14,6 +16,10 @@ typedef int fixed;
 // Constant Number
 #define PI 3.141592
 #define Euler 2.718281
+#define log2 0.693147
+#define ln10 2.302585
+#define sqrt2 1.414214
+#define sqrt3 1.732051
 
 // Conversion Function
 extern fixed fromChar(char f);

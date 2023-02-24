@@ -109,7 +109,7 @@ float cosDeg(fixed deg) {
 }
 
 float tanDeg(fixed deg) {
-		return sinDeg(deg) / cosDeg(deg);
+		return cosDeg(deg) != 0 ? sinDeg(deg) / cosDeg(deg) : -9999;
 }
 
 #endif

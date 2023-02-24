@@ -6,7 +6,10 @@ int main() {
 
 	float a = 150.75;
 	float b = 22.5;
-	fixed deg = 201;
+	fixed deg1 = 21;
+	fixed deg2 = 102;
+	fixed deg3 = 250;
+	fixed deg4 = 331;
     fixed x, y;
     char buf_x[512], buf_y[512];
 
@@ -39,10 +42,25 @@ int main() {
     printf("div_next: %f\n", toFloat(div_next(x, y)));
     printf("div_long: %f\n\n", toFloat(div_long(x, y)));
 
-	printf("삼각함수 연산 테스트 환경: deg = %d°\n", deg);
-	printf("sin %d° = %f\n", deg, sinDeg(deg));
-	printf("cos %d° = %f\n", deg, cosDeg(deg));
-	printf("tan %d° = %f\n", deg, tanDeg(deg));
+	printf("삼각함수 연산 (제 1사분면): deg = %d°\n", deg1);
+	printf("sin %d° = %f\n", deg1, sinDeg(deg1));
+	printf("cos %d° = %f\n", deg1, cosDeg(deg1));
+	printf("tan %d° = %f\n\n", deg1, tanDeg(deg1));
+
+	printf("삼각함수 연산 (제 2사분면): deg = %d°\n", deg2);
+	printf("sin %d° = %f\n", deg2, sinDeg(deg2));
+	printf("cos %d° = %f\n", deg2, cosDeg(deg2));
+	printf("tan %d° = %f\n\n", deg2, tanDeg(deg2));
+
+	printf("삼각함수 연산 (제 3사분면): deg = %d°\n", deg3);
+	printf("sin %d° = %f\n", deg3, sinDeg(deg3));
+	printf("cos %d° = %f\n", deg3, cosDeg(deg3));
+	printf("tan %d° = %f\n\n", deg3, tanDeg(deg3));
+	
+	printf("삼각함수 연산 (제 4사분면): deg = %d°\n", deg4);
+	printf("sin %d° = %f\n", deg4, sinDeg(deg4));
+	printf("cos %d° = %f\n", deg4, cosDeg(deg4));
+	printf("tan %d° = %f\n\n", deg4, tanDeg(deg4));
 	
 	return 0;
 }
