@@ -1,8 +1,6 @@
-# 실전코딩 기말 프로젝트
+# fx_S1318_lib
 
-## 이준서
-
-## 201921115
+## 2022 Winter Practical Coding 2 Final Project: fx_S1318_lib
 
 ## 목차
 
